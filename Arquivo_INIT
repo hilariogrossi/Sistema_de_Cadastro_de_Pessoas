@@ -1,0 +1,53 @@
+import Exercício_125.Biblioteca.Interface
+from Exercício_125.Biblioteca.Interface import *
+
+
+def arquivoExiste(nome):
+    try:
+        abrir = open(nome, 'rt') # rt = read / text
+        abrir.close()
+    except FileNotFoundError:
+        return False
+    else:
+        return True
+
+
+def criarArquivo(nome):
+    try:
+        abrir = open(nome, 'wt+') # wt = write / text # + = se não existir o arquivo o Python vai criá-lo
+        abrir.close()
+    except:
+        print('\033[31mHouve um ERRO na criação do arquivo!\033[m')
+    else:
+        print(f'\033[34mArquivo {nome} criado com sucesso.\033[m')
+
+
+def lerArquivo(nome):
+    try:
+        abrir = open(nome, 'rt')
+    except:
+        print('\033[32mERRO ao abrir o arquivo!\033[m')
+    else:
+        cabeçalho('PESSOAS CADASTRADAS')
+        print('=' * 80)
+        for linha in abrir:
+            dados = linha.split(';')
+            dados[1] = dados[1].replace('\n', '')
+            print(f'{dados[0]:<55}{dados[1]:>8} anos.')
+    finally:
+        abrir.close()
+
+
+def cadastrar(arquivo, nome='Desconhecido', idade=0):
+    try:
+        abrir = open(arquivo, 'at') # at = append / text
+    except:
+        print('\033[32mHouve um ERRO na abertura do arquivo!\033[m')
+    else:
+        try:
+            abrir.write(f'{nome};{idade}\n')
+        except:
+            print(f'\033[32mHouve um erro na hora de escrever os dados no arquivo {arquivo}!\033[m')
+        else:
+            print(f'\033[34m{nome} adicionado(a) com sucesso!\033[m')
+            abrir.close()
