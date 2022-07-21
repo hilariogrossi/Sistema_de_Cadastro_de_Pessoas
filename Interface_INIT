@@ -1,0 +1,38 @@
+def leiaInt(mensagem):
+    ok = False
+    valor = 0
+    while True:
+        numero = str(input(mensagem))
+        if numero.isnumeric():
+            valor = int(numero)
+            ok = True
+        else:
+            print('\033[0;31mERRO! Digite um número inteiro válido.\033[m')
+
+        if ok:
+            break
+    return valor
+
+
+
+def linha(tamanho=80):
+    return '=' * tamanho
+
+
+def cabeçalho(texto):
+    print(linha())
+    print(texto.center(80))
+
+
+def menu(lista):
+    cabeçalho('MENU PRINCIPAL')
+    print(linha())
+    contador = 1
+    for item in lista:
+        print(f'\033[33m{contador} -\033[m \033[35m{item}\033[m')
+        contador += 1
+    print(linha())
+    opção = leiaInt('\033[32mDigite sua Opção: \033[m')
+    return opção
+
+
