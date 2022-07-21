@@ -1,0 +1,35 @@
+from Exercício_125.Biblioteca.Interface import *
+from Exercício_125.Biblioteca.Arquivo import *
+from time import sleep
+
+arquivo = 'Arquivo_em_Python.txt'
+if arquivoExiste(arquivo):
+    cabeçalho('\033[34m       Arquivo encontrado com sucesso!\033[m')
+else:
+    cabeçalho('\033[31mArquivo NÃO encontrado!\033[m')
+    criarArquivo(arquivo)
+
+cabeçalho('SISTEMA DE ARQUIVO v1.0')
+
+while True:
+    resposta = menu(['Ver pessoas cadastradas', 'Cadastrar nova pessoa', 'Sair do sistema'])
+
+    if resposta == 1:
+        # Opção de listar o conteúdo de um arquivo.
+        lerArquivo(arquivo)
+    elif resposta == 2:
+        # Opção de cadastrar um novo nome com idade
+        cabeçalho('NOVO CADASTRO')
+        nome = str(input('Nome para cadastro: '))
+        idade = leiaInt('Idade: ')
+        cadastrar(arquivo, nome, idade)
+    elif resposta == 3:
+        cabeçalho('\033[36m  Saindo do Sistema de Arquivos. OBRIGADO!\033[m')
+        print(linha())
+        sleep(1)
+        break
+    else:
+        print(linha())
+        print('\033[31mERRO! Por favor digite um número que conste no menu.\033[m')
+    sleep(3)
+
